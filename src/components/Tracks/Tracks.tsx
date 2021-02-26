@@ -11,7 +11,7 @@ const Tracks = (props: any) => {
   useEffect(() => {
     dispatch(getNewReleases());
     dispatch(fetchLibrary(userId));
-  }, [dispatch]);
+  }, [dispatch, userId]);
 
   return (
     <React.Fragment>

@@ -1,11 +1,9 @@
 import React from "react";
 import { Button } from "reactstrap";
 import { FaPlus } from "react-icons/fa";
-import { constant } from "lodash";
 import LibraryService from "../../services/library.service";
 import { useSelector } from "react-redux";
 import { fetchLibrary } from "../../requests/albumRequests";
-import { toast } from "react-toastify";
 const truncate = (str: string) => {
   return str.length > 18 ? str.substr(0, 18) + "..." : str;
 };
