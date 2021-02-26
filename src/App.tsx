@@ -1,10 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import { Provider } from "react-redux";
 import "./App.css";
-import Layout from "./components/Layout/Layout";
 import store from "./store";
+import Index from "./components/Index/Index";
+import Home from "./components/Home/Home";
+import Redirect from "./components/Redirect/Redirect";
 
 function App() {
   return (
@@ -12,10 +14,12 @@ function App() {
       <Router>
         <React.Fragment>
           <div className="App">
-            {/* <Navbar /> */}
+            <Navbar />
             <div className="container">
               <Switch>
-                <Route exact path="/" component={Layout} />
+                <Route exact path="/" component={Index} />
+                <Route exact path="/redirect" component={Redirect} />
+                <Route exact path="/home" component={Home} />
                 {/* <Route exact path= "/lyrics/track/:id" component={Lyrics} /> */}
               </Switch>
             </div>
