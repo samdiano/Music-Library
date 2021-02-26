@@ -9,8 +9,8 @@ const SearchResults = (props: any) => {
     (state) => state.album.result?.tracks.items
   );
   return (
-    <ListGroup className="text-left">
-      {result && <h3 className="text-left">Search Result</h3>}
+    <ListGroup className="text-center">
+      {result && <h3>Search Result</h3>}
       {result &&
         result.map((res: any) => (
           <ListGroupItem
@@ -25,7 +25,7 @@ const SearchResults = (props: any) => {
                 round={true}
                 src={res.album.images && res.album.images[0].url}
               />
-              <span>{res.name}</span>
+              <span className="mr-5"><strong>{res.album.artists[0].name}:</strong> {res.name}</span>
             </span>
             <span>
               <span className="mr-5">

@@ -9,7 +9,7 @@ export const asyncActions = (actionName: string) => ({
     type: asyncActionName(actionName).loading,
     payload: bool,
   }),
-  success: (payload: boolean) => ({
+  success: (payload: any) => ({
     type: asyncActionName(actionName).success,
     payload,
   }),

@@ -1,5 +1,9 @@
 import { asyncActionName } from "../util/AsyncUtil";
-import { GET_NEW_RELEASES, SEARCH_ALBUMS } from "../actions/types";
+import {
+  GET_NEW_RELEASES,
+  SEARCH_ALBUMS,
+  FETCH_LIBRARY,
+} from "../actions/types";
 
 const initialState = {
   newReleases: [],
@@ -7,6 +11,24 @@ const initialState = {
 
 const AlbumReducer = (state = initialState, action: any) => {
   switch (action.type) {
+    case asyncActionName(FETCH_LIBRARY).loading:
+      return { ...state, loading: action.payload };
+    case asyncActionName(FETCH_LIBRARY).success:
+      // const library = action.payload.forEach((doc: any) => {
+      //   console.log(doc.id, "=>", doc.data());
+      // });
+      return {
+        ...state,
+        library: action.payload,
+        success: true,
+      };
+    case asyncActionName(FETCH_LIBRARY).failure:
+      return {
+        ...state,
+        error: action.payload.status,
+        success: false,
+      };
+
     case asyncActionName(GET_NEW_RELEASES).loading:
       return { ...state, loading: action.payload };
     case asyncActionName(GET_NEW_RELEASES).success:

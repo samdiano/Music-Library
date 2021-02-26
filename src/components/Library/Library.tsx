@@ -1,21 +1,18 @@
 import React, { useEffect } from "react";
-import { getNewReleases, fetchLibrary } from "../../requests/albumRequests";
-// import Loader from "../Loader/Loader";
-import Track from "./Track";
+import Track from "../Tracks/Track";
 import { useSelector, useDispatch } from "react-redux";
+import { getNewReleases } from "../../requests/albumRequests";
 
-const Tracks = (props: any) => {
+const Library = (props: any) => {
   const album: any = useSelector<any>((state) => state.album);
-  const userId: any = useSelector<any>((state) => state.user.user.id);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNewReleases());
-    dispatch(fetchLibrary(userId));
   }, [dispatch]);
 
   return (
     <React.Fragment>
-      <h3 className=" mb-4">{"New Releases"}</h3>
+      <h3 className=" mb-4">{"My Library"}</h3>
       <div className="row">
         {album.newReleases.albums?.items.map((item: any) => (
           <Track key={item.id} track={item} />
@@ -26,4 +23,4 @@ const Tracks = (props: any) => {
   );
 };
 
-export default Tracks;
+export default Library;

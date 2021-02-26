@@ -7,6 +7,8 @@ import store from "./store";
 import Index from "./components/Index/Index";
 import Home from "./components/Home/Home";
 import Redirect from "./components/Redirect/Redirect";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
       <Router>
         <React.Fragment>
           <div className="App">
+            <ToastContainer />
             <Navbar />
             <div className="container">
               <Switch>

@@ -1,13 +1,30 @@
 import React from "react";
 import { Button } from "reactstrap";
 import { FaPlus } from "react-icons/fa";
-
+import { constant } from "lodash";
+import LibraryService from "../../services/library.service";
+import { useSelector } from "react-redux";
+import { fetchLibrary } from "../../requests/albumRequests";
+import { toast } from "react-toastify";
 const truncate = (str: string) => {
   return str.length > 18 ? str.substr(0, 18) + "..." : str;
 };
 
 const Track = (props: any) => {
+  const userId: any = useSelector<any>((state) => state.user.user.id);
   const { track } = props;
+  track.userId = userId;
+  const addToLibrary = () => {
+    LibraryService.create(track)
+      .then(() => {
+        // setSubmitted(true);
+        fetchLibrary(userId);
+        alert("hurray");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   return (
     <div className="col-md-3">
       <div className="card mb-4 shadow-sm">
@@ -24,7 +41,9 @@ const Track = (props: any) => {
           </h5>
           <span>
             <Button color="primary" className="btn btn-block">
-               <span className="mr-3">Save to Library</span>
+              <span onClick={addToLibrary} className="mr-3">
+                Save to Library
+              </span>
               <FaPlus />
             </Button>
           </span>
