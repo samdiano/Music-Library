@@ -9,7 +9,7 @@ const Tracks = (props: any) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNewReleases());
-  }, []);
+  }, [dispatch]);
 
   return (
     <React.Fragment>
