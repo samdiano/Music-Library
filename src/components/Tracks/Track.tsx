@@ -19,7 +19,7 @@ const Track = (props: any) => {
       .then(() => {
         // setSubmitted(true);
         fetchLibrary(userId);
-        alert("hurray");
+        alert("added to firestore");
       })
       .catch((e) => {
         console.log(e);
