@@ -1,9 +1,10 @@
 import React from "react";
 import { Button } from "reactstrap";
+import { FaPlus } from "react-icons/fa";
 
 const truncate = (str: string) => {
-    return (str.length > 18) ? str.substr(0, 18) + "..." : str;
-  };
+  return str.length > 18 ? str.substr(0, 18) + "..." : str;
+};
 
 const Track = (props: any) => {
   const { track } = props;
@@ -21,9 +22,12 @@ const Track = (props: any) => {
             {truncate(track.name)}
             <br />
           </h5>
-          <Button className="btn btn-dark btn-block">
-            <i className="fas fa-chevron-right"></i> Save to Library
-          </Button>
+          <span>
+            <Button color="primary" className="btn btn-block">
+               <span className="mr-3">Save to Library</span>
+              <FaPlus />
+            </Button>
+          </span>
         </div>
       </div>
     </div>

@@ -19,6 +19,7 @@ const Tracks = (props: any) => {
           <Track key={item.id} track={item} />
         ))}
       </div>
+      <hr />
     </React.Fragment>
   );
 };

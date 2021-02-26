@@ -1,5 +1,5 @@
 import { asyncActions } from "../util/AsyncUtil";
-import { GET_NEW_RELEASES } from "../actions/types";
+import { GET_NEW_RELEASES, SEARCH_ALBUMS } from "../actions/types";
 import { albumsConstant } from "../constants/constants";
 import { get } from "../util/Api";
 
@@ -16,3 +16,17 @@ export const getNewReleases = () => async (dispatch: any) => {
     dispatch(asyncActions(GET_NEW_RELEASES).failure(true, err));
   }
 };
+
+export const searchAlbums = (q: any) => async (dispatch: any) => {
+  dispatch(asyncActions(SEARCH_ALBUMS).loading(true));
+  try {
+    const res = await get(`${albumsConstant.SEARCH_ALBUMS_URL}?q=${q}&type=track`, {});
+    if (res.status === 200) {
+      dispatch(asyncActions(SEARCH_ALBUMS).success(res.data));
+      dispatch(asyncActions(SEARCH_ALBUMS).loading(false));
+    }
+  } catch (err) {
+    dispatch(asyncActions(SEARCH_ALBUMS).failure(true, err));
+  }
+};
+
