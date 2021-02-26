@@ -2,3 +2,5 @@ export const LOGIN_USER = "LOGIN_USER";
 export const REGISTER_USER = "REGISTER_USER";
 export const GET_LOGGED_IN_USER = "GET_LOGGED_IN_USER";
 export const GET_NEW_RELEASES = "GET_NEW_RELEASES";
+export const SEARCH_ALBUMS = "SEARCH_ALBUMS";
+export const FETCH_LIBRARY = "FETCH_LIBRARY";
