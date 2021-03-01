@@ -17,8 +17,8 @@ const Library = (props: any) => {
     <React.Fragment>
       <h3 className=" mb-4">{"My Library"}</h3>
       <div className="row">
-        {library?.length !== 0 ? (
-          library?.map((item: any) => <Track key={item.id} track={item} />)
+        {library && library.length !== 0 ? (
+          library.map((item: any) => <Track key={item.id} track={item} />)
         ) : (
           <Container>
             <img src={empty} alt="empty search" height={300} />

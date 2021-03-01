@@ -50,7 +50,7 @@ const Track = (props: any) => {
             className="mb-2"
             width="100%"
             alt="cover"
-            src={track.images[0].url}
+            src={track.images ? track.images[0].url : track.album.images[0].url}
           />
           <h5 className="card-text">
             {truncate(track.name)}
