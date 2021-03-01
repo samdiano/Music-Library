@@ -30,9 +30,14 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
+  const logout = () => {
+    localStorage.removeItem("expiry_time");
+    window.location.href = "/";
+  };
+
   return (
     <Fragment>
-      {isAuthenticated() && (
+      { isAuthenticated() &&
         <div className="mb-5">
           <Navbar color="light" light expand="md">
             <div className="container">
@@ -67,12 +72,16 @@ const NavBar = () => {
                     </Link>
                   </NavItem>
                 </Nav>
-                <NavbarText>Logout</NavbarText>
+                <NavbarText>
+                  <span style={{ cursor: "pointer" }} onClick={logout}>
+                    Logout
+                  </span>
+                </NavbarText>
               </Collapse>
             </div>
           </Navbar>
         </div>
-      )}
+      }
     </Fragment>
   );
 };

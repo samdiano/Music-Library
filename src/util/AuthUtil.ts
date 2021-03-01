@@ -23,12 +23,12 @@ export const setAuthHeader = () => {
 };
 
 export const isAuthenticated = () => {
-  const expiry_time = Number(localStorage.expiry_time);
+  const expiry_time = localStorage.expiry_time;
   const current_time = Date.now();
 
   return (
     expiry_time &&
-    current_time < expiry_time &&
+    Number(current_time < expiry_time) &&
     localStorage.getItem("params") !== null
   );
 };
