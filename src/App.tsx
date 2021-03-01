@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
+import Library from "./components/Library/Library";
 import { Provider } from "react-redux";
 import "./App.css";
 import store from "./store";
@@ -24,7 +25,7 @@ function App() {
                 <Route exact path="/" component={Index} />
                 <Route exact path="/redirect" component={Redirect} />
                 <PrivateRoute exact path="/home" component={Home} />
-                {/* <Route exact path= "/lyrics/track/:id" component={Lyrics} /> */}
+                <PrivateRoute exact path="/library" component={Library} />
               </Switch>
             </div>
           </div>

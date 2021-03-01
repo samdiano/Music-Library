@@ -1,22 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Track from "../Tracks/Track";
 import { useSelector, useDispatch } from "react-redux";
-import { getNewReleases } from "../../requests/albumRequests";
-
+import { fetchLibrary } from "../../requests/albumRequests";
+import { Container } from "reactstrap";
+import empty from "../../empty.png";
 const Library = (props: any) => {
-  const album: any = useSelector<any>((state) => state.album);
+  const userId: any = useSelector<any>((state) => state.user.user.id);
+  const library: any = useSelector<any>((state) => state.album.library);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(getNewReleases());
-  }, [dispatch]);
+    dispatch(fetchLibrary(userId));
+  }, [userId]);
 
   return (
     <React.Fragment>
       <h3 className=" mb-4">{"My Library"}</h3>
       <div className="row">
-        {album.newReleases.albums?.items.map((item: any) => (
-          <Track key={item.id} track={item} />
-        ))}
+        {library?.length !== 0 ? (
+          library?.map((item: any) => <Track key={item.id} track={item} />)
+        ) : (
+          <Container>
+            <img src={empty} alt="empty search" height={300} />
+            <p>
+              {" "}
+              There's nothing here, Add songs to library to display them here{" "}
+            </p>
+          </Container>
+        )}
       </div>
       <hr />
     </React.Fragment>
