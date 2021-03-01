@@ -1,8 +1,6 @@
 import React from "react";
-import Avatar from "react-avatar";
 import { useSelector } from "react-redux";
-import { Button, Container, ListGroup, ListGroupItem } from "reactstrap";
-import { FaPlus } from "react-icons/fa";
+import { Container, ListGroup } from "reactstrap";
 import empty from "../../empty.png";
 import SearchResult from "./SearchResult";
 const SearchResults = (props: any) => {

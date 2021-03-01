@@ -16,7 +16,10 @@ import Avatar from "react-avatar";
 import Search from "../Search/Search";
 import { isAuthenticated } from "../../util/AuthUtil";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
 const NavBar = () => {
+  const location = useLocation();
   const user: any = useSelector<any>((state) => state.user.user);
   const state: any = useSelector<any>((state) => state);
   const dispatch = useDispatch();
@@ -27,9 +30,14 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
+  const logout = () => {
+    localStorage.removeItem("expiry_time");
+    window.location.href = "/";
+  };
+
   return (
     <Fragment>
-      {isAuthenticated() && (
+      { isAuthenticated() &&
         <div className="mb-5">
           <Navbar color="light" light expand="md">
             <div className="container">
@@ -43,27 +51,37 @@ const NavBar = () => {
                     round={true}
                     src={user.images && user.images[0].url}
                   />
-                  {user.display_name}
+                  {location.pathname === "/home" ? user.display_name : "Home"}
                 </NavbarBrand>
               </Link>
               <NavbarToggler onClick={toggle} />
               <Collapse isOpen={isOpen} navbar>
                 <Nav style={{ width: "50%" }} className="mx-auto" navbar>
                   <InputGroup className="col-12" inline>
-                    <Search />
+                    {location.pathname === "/home" ? (
+                      <Search />
+                    ) : (
+                      <h4 className="ml-5">My Library</h4>
+                    )}
                   </InputGroup>
                   <NavItem>
                     <Link to="/library">
-                      <NavLink>Library</NavLink>
+                      {location.pathname === "/home" && (
+                        <NavLink>Library</NavLink>
+                      )}
                     </Link>
                   </NavItem>
                 </Nav>
-                <NavbarText>Logout</NavbarText>
+                <NavbarText>
+                  <span style={{ cursor: "pointer" }} onClick={logout}>
+                    Logout
+                  </span>
+                </NavbarText>
               </Collapse>
             </div>
           </Navbar>
         </div>
-      )}
+      }
     </Fragment>
   );
 };

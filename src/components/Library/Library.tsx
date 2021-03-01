@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Track from "../Tracks/Track";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLibrary } from "../../requests/albumRequests";
 import { Container } from "reactstrap";
 import empty from "../../empty.png";
+
 const Library = (props: any) => {
   const userId: any = useSelector<any>((state) => state.user.user.id);
   const library: any = useSelector<any>((state) => state.album.library);
@@ -11,11 +12,10 @@ const Library = (props: any) => {
 
   useEffect(() => {
     dispatch(fetchLibrary(userId));
-  }, [userId]);
+  }, [userId, dispatch]);
 
   return (
     <React.Fragment>
-      <h3 className=" mb-4">{"My Library"}</h3>
       <div className="row">
         {library && library.length !== 0 ? (
           library.map((item: any) => <Track key={item.id} track={item} />)
