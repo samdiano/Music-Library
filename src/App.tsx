@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
+import Library from "./components/Library/Library";
 import { Provider } from "react-redux";
 import "./App.css";
 import store from "./store";
@@ -9,6 +10,7 @@ import Home from "./components/Home/Home";
 import Redirect from "./components/Redirect/Redirect";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { PrivateRoute } from "./PrivateRoute";
 
 function App() {
   return (
@@ -22,8 +24,8 @@ function App() {
               <Switch>
                 <Route exact path="/" component={Index} />
                 <Route exact path="/redirect" component={Redirect} />
-                <Route exact path="/home" component={Home} />
-                {/* <Route exact path= "/lyrics/track/:id" component={Lyrics} /> */}
+                <PrivateRoute exact path="/home" component={Home} />
+                <PrivateRoute exact path="/library" component={Library} />
               </Switch>
             </div>
           </div>

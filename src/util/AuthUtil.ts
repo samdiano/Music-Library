@@ -11,7 +11,7 @@ export const getParamValues = (url: string) => {
 };
 export const setAuthHeader = () => {
   try {
-    const params = JSON.parse(localStorage.getItem("params") || '{}') ;
+    const params = JSON.parse(localStorage.getItem("params") || "{}");
     if (params) {
       axios.defaults.headers.common[
         "Authorization"
@@ -20,4 +20,15 @@ export const setAuthHeader = () => {
   } catch (error) {
     console.log("Error setting auth", error);
   }
+};
+
+export const isAuthenticated = () => {
+  const expiry_time = Number(localStorage.expiry_time);
+  const current_time = Date.now();
+
+  return (
+    expiry_time &&
+    current_time < expiry_time &&
+    localStorage.getItem("params") !== null
+  );
 };

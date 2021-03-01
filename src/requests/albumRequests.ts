@@ -44,15 +44,26 @@ export const searchAlbums = (q: any) => async (dispatch: any) => {
 export const fetchLibrary = (userId: string) => async (dispatch: any) => {
   dispatch(asyncActions(FETCH_LIBRARY).loading(true));
   try {
-    const ref = await LibraryService.getAll().where("userId", "==", userId).get();
+    const ref = await LibraryService.getAll()
+      .where("userId", "==", userId)
+      .get();
 
     if (ref) {
       dispatch(asyncActions(FETCH_LIBRARY).success(ref));
       dispatch(asyncActions(FETCH_LIBRARY).loading(false));
     }
+  } catch (err) {
+    dispatch(asyncActions(FETCH_LIBRARY).failure(true, err));
+  }
+};
 
-    // if (res.status === 200) {
-    // }
+export const deleteFromLibrary = (docId: string) => async (dispatch: any) => {
+  dispatch(asyncActions(FETCH_LIBRARY).loading(true));
+  try {
+    await LibraryService.remove(docId);
+
+    dispatch(asyncActions(FETCH_LIBRARY).success(true));
+    dispatch(asyncActions(FETCH_LIBRARY).loading(false));
   } catch (err) {
     dispatch(asyncActions(FETCH_LIBRARY).failure(true, err));
   }

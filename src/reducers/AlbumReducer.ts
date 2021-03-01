@@ -14,14 +14,20 @@ const AlbumReducer = (state = initialState, action: any) => {
     case asyncActionName(FETCH_LIBRARY).loading:
       return { ...state, loading: action.payload };
     case asyncActionName(FETCH_LIBRARY).success:
-      // const library = action.payload.forEach((doc: any) => {
-      //   console.log(doc.id, "=>", doc.data());
-      // });
-      return {
-        ...state,
-        library: action.payload,
-        success: true,
-      };
+      let libraryArray: any = [];
+      try {
+        action.payload.forEach((doc: any) => {
+          libraryArray.push({ ...doc.data(), docId: doc.id });
+        });
+        return {
+          ...state,
+          library: libraryArray,
+          success: true,
+        };
+      } catch (e) {
+        console.log(e);
+      }
+      return;
     case asyncActionName(FETCH_LIBRARY).failure:
       return {
         ...state,

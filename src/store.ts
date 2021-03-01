@@ -14,7 +14,7 @@ const store: Store & {
   dispatch: any;
 } = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(createLogger(), ...middleware))
+  composeWithDevTools(applyMiddleware( ...middleware))
 );
 
 export default store;
