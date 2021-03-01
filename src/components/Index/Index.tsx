@@ -1,5 +1,7 @@
 import React from "react";
 import { Button } from "reactstrap";
+import { isAuthenticated } from "../../util/AuthUtil";
+import { Redirect } from "react-router-dom";
 
 const Index = () => {
   const {
@@ -13,19 +15,25 @@ const Index = () => {
   };
 
   return (
-    <div className="border border-light p-3 mb-4">
-      <div
-        className="d-flex align-items-center justify-content-center"
-        style={{ height: "700px" }}
-      >
-        <div className="p-2 bd-highlight col-example">
-          <h1 className="mb-5">My Library</h1>
-          <Button color="primary" onClick={handleLogin}>
-            Login To Spotify
-          </Button>
+    <>
+      {isAuthenticated() ? (
+        <Redirect to={{ pathname: "/home" }} />
+      ) : (
+        <div className="border border-light p-3 mb-4">
+          <div
+            className="d-flex align-items-center justify-content-center"
+            style={{ height: "700px" }}
+          >
+            <div className="p-2 bd-highlight col-example">
+              <h1 className="mb-5">My Music Library</h1>
+              <Button size="lg" block color="primary" onClick={handleLogin}>
+                Login To Spotify
+              </Button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
