@@ -14,13 +14,14 @@ import {
 import { getUserProfile } from "../../requests/userRequests";
 import Avatar from "react-avatar";
 import Search from "../Search/Search";
-
+import { isAuthenticated } from "../../util/AuthUtil";
 const NavBar = () => {
   const user: any = useSelector<any>((state) => state.user.user);
+  const state: any = useSelector<any>((state) => state);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getUserProfile());
-  }, [dispatch]);
+    if (!user.display_name && isAuthenticated()) dispatch(getUserProfile());
+  }, [dispatch, state, user]);
 
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
