@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Track from "../Tracks/Track";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLibrary } from "../../requests/albumRequests";
@@ -12,7 +12,7 @@ const Library = (props: any) => {
 
   useEffect(() => {
     dispatch(fetchLibrary(userId));
-  }, [userId]);
+  }, [userId, dispatch]);
 
   return (
     <React.Fragment>

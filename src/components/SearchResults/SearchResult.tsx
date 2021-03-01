@@ -11,7 +11,6 @@ import { toast } from "react-toastify";
 const SearchResult = (props: any) => {
   const userId: any = useSelector<any>((state) => state.user.user.id);
   const library: any = useSelector<any>((state) => state.album.library);
-  const loading: any = useSelector<any>((state) => state.album.loading);
   const dispatch = useDispatch();
   const { res } = props;
   res.userId = userId;
